@@ -1,0 +1,40 @@
+<main class="main">
+  <ng-container *ngIf="spinnerService.isSpinning$ | async; else table">
+    <app-spinner></app-spinner>
+  </ng-container>
+  <ng-template #table>
+    <table mat-table
+           [dataSource]="audioRecords"
+           class="mat-elevation-z8 main__table"
+    >
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let record">{{ record.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let record">{{ record.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="fileName">
+        <th mat-header-cell *matHeaderCellDef>Filename</th>
+        <td mat-cell *matCellDef="let record">{{ record.fileName }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row
+          *matRowDef="let row; columns: displayedColumns"
+          [ngClass]="{ 'selected': (row.id === (audioPlayerService.selectedRowId$ | async)),
+                       'invalid': !row.validMp3
+                     }"
+          (click)="playAudio(row)"
+      ></tr>
+    </table>
+  </ng-template>
+  <ng-container *ngIf="audioPlayerService.showAudioPlayer$ | async">
+    <app-audio-player [audioData]="audioData"
+                      class="main__player"
+    ></app-audio-player>
+  </ng-container>
+</main>

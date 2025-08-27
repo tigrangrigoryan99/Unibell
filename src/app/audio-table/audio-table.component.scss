@@ -1,0 +1,23 @@
+.main {
+  padding: 12px 24px;
+  &__table {
+    margin-bottom: 16px;
+  }
+  &__player {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .selected {
+    background-color: #f0f0f0;
+  }
+  .invalid {
+    color: red;
+  }
+}
+
+.mat-mdc-row:hover {
+  cursor: pointer;
+  background-color: #f0f0f0;
+}
