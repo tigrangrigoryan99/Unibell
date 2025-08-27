@@ -1,0 +1,8 @@
+name: Demo Workflow
+on: [workflow_dispatch]
+jobs: 
+  print: 
+    runs-on: macos-15-large
+    steps:
+      - name: Print to console
+        run: echo Hello GH Actions!
